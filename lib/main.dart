@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:track_my_page/views/index.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Text('Flutter Demo Home Page'),
+      home: Index(),
     );
   }
 }
