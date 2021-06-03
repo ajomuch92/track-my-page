@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glyphicon/glyphicon.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
+import 'package:track_my_page/views/home.dart';
 
 class Index extends StatefulWidget {
   Index({Key? key}) : super(key: key);
@@ -24,11 +25,12 @@ class _IndexState extends State<Index> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Track my page - Demo'),
+        backgroundColor: Colors.blueGrey.shade800,
       ),
       body: PageView(
         controller: _controller,
         children: <Widget>[
-          ColoredBox(color: Colors.blueGrey.shade100),
+          Home(),
           ColoredBox(color: Colors.redAccent),
         ],
       ),
