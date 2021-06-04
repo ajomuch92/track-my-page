@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:track_my_page/data/data_provider.dart';
+import 'package:track_my_page/models/counter_model.dart';
+import 'package:track_my_page/shared_widget/black_card.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -10,42 +12,37 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin{
   final DataProvider provider = DataProvider();
-  int? visitors = 0;
-  double? average = 0;
 
   @override
   void initState() { 
     super.initState();
-    provider.getTotalVisitors().then((value) {
-      setState(() {
-        visitors = value.count;
-        average = value.avg;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    Size _size = MediaQuery.of(context).size;
 
     return Container(
       color: Colors.blueGrey.shade800,
       child: Center(
-        child: Container(
-          height: _size.height * 0.35,
-          width: _size.width * 0.75,
-          decoration: BoxDecoration(
-            color: Colors.blueGrey.shade900.withOpacity(0.5),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Visitantes', style: TextStyle(color: Colors.white, fontSize: 20.0),),
-              Text(visitors!.toString(), style: TextStyle(color: Colors.white, fontSize: 48.0),),
-              Text('Promedio $average', style: TextStyle(color: Colors.white, fontSize: 16.0)),
-            ],
+        child: BlackCard(
+          child: FutureBuilder<CounterModel>(
+            future: provider.getTotalVisitors(),
+            builder: (context, snap) {
+              if(snap.hasData) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Visitantes', style: TextStyle(color: Colors.white, fontSize: 20.0),),
+                    Text(snap.data!.count!.toString(), style: TextStyle(color: Colors.white, fontSize: 48.0),),
+                    Text('Promedio ${snap.data!.avg!}', style: TextStyle(color: Colors.white, fontSize: 16.0)),
+                  ],
+                );
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
         ),
       ),

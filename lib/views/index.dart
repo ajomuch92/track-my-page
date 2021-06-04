@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glyphicon/glyphicon.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
+import 'package:track_my_page/views/graph.dart';
 import 'package:track_my_page/views/home.dart';
 
 class Index extends StatefulWidget {
@@ -31,7 +32,7 @@ class _IndexState extends State<Index> {
         controller: _controller,
         children: <Widget>[
           Home(),
-          ColoredBox(color: Colors.redAccent),
+          Graph(),
         ],
       ),
       extendBody: true,
