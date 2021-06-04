@@ -33,6 +33,7 @@ dependencies:
   supabase: ^0.0.1-dev.16
   syncfusion_flutter_charts: ^19.1.66+1
   flutter_dotenv: ^5.0.0
+  toggle_switch: ^0.1.9
 
 dev_dependencies:
   flutter_test:
