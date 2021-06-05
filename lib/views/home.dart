@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin{
   final DataProvider provider = DataProvider();
+  Key key = Key(DateTime.now().microsecondsSinceEpoch.toString());
 
   @override
   void initState() { 
@@ -27,6 +28,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin{
       child: Center(
         child: BlackCard(
           child: FutureBuilder<CounterModel>(
+            key: key,
             future: provider.getTotalVisitors(),
             builder: (context, snap) {
               if(snap.hasData) {
@@ -36,6 +38,14 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin{
                     Text('Visitantes', style: TextStyle(color: Colors.white, fontSize: 20.0),),
                     Text(snap.data!.count!.toString(), style: TextStyle(color: Colors.white, fontSize: 48.0),),
                     Text('Promedio ${snap.data!.avg!}', style: TextStyle(color: Colors.white, fontSize: 16.0)),
+                    ElevatedButton(
+                      child: Text('Actualizar'),
+                      onPressed: () {
+                        setState(() {
+                          key = Key(DateTime.now().microsecondsSinceEpoch.toString());
+                        });
+                      },
+                    )
                   ],
                 );
               }

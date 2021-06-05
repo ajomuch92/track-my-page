@@ -27,6 +27,7 @@ class _IndexState extends State<Index> {
       appBar: AppBar(
         title: Text('Track my page - Demo'),
         backgroundColor: Colors.blueGrey.shade800,
+        elevation: 0,
       ),
       body: PageView(
         controller: _controller,
